@@ -11,4 +11,4 @@ target_sources(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-target_link_libraries(${PROJECT_NAME} logger)
+target_link_libraries(${PROJECT_NAME} logger engine)

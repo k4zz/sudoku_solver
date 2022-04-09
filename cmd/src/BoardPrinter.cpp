@@ -1,6 +1,24 @@
 #include "BoardPrinter.h"
 #include "Logger.h"
 
+void BoardPrinter::printBoard(Board& _board)
+{
+    printTopFrame();
+    printRow(_board.getRow(0));
+    printRow(_board.getRow(1));
+    printRow(_board.getRow(2));
+    printMiddleFrame();
+    printRow(_board.getRow(3));
+    printRow(_board.getRow(4));
+    printRow(_board.getRow(5));
+    printMiddleFrame();
+    printRow(_board.getRow(6));
+    printRow(_board.getRow(7));
+    printRow(_board.getRow(8));
+    printBottomFrame();
+
+}
+
 void BoardPrinter::printBoard(const std::string& _notation)
 {
     printTopFrame();
@@ -18,6 +36,27 @@ void BoardPrinter::printBoard(const std::string& _notation)
     printBottomFrame();
 }
 
+void BoardPrinter::printRow(const Group& _group)
+{
+    std::string str{};
+    str += "|";
+    for (size_t i = 1; i <= _group.mCells.size(); ++i)
+    {
+        std::string val{};
+        if(_group.mCells.at(i - 1)->value != 0)
+            val = std::to_string(_group.mCells.at(i - 1)->value);
+        else
+            val = ".";
+
+        str += val;
+        if (i != 0 and !(i % 3))
+            str += "|";
+        else
+            str += " ";
+    }
+    Log(str);
+}
+
 void BoardPrinter::printRow(const std::string& _str)
 {
     std::string str{};
@@ -25,7 +64,7 @@ void BoardPrinter::printRow(const std::string& _str)
     for (size_t i = 0; i < 17; ++i)
     {
         if (i == 0 or !(i % 2))
-            if(_str[i / 2] == '0')
+            if (_str[i / 2] == '0')
                 str += ".";
             else
                 str += _str[i / 2];
