@@ -10,10 +10,11 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    BoardPrinter::printBoard(argv[1]);
+    //TODO: notation validator
+    //TODO: 81 chars, only numbers
 
     Board board(argv[1]);
-    BoardPrinter::printBoard(std::string(argv[1]));
+    BoardPrinter::printBoard(board);
 
     return 0;
 }

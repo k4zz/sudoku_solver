@@ -1,47 +1,83 @@
 #include "Board.h"
 
+#include "Logger.h"
+
 #include <string>
 
 Board::Board(const std::string& _notation)
 {
-    for(auto& chr : _notation)
+    if(_notation.length() != 81)
+        Log("Board: invalid size of notation");
+
+    // Create cells in board matrix
+    for(size_t row = 0; row < 9; ++row)
     {
-        mCells.push_back(new Cell(chr - 48));
+        std::vector<Cell*> vecRow;
+        for(size_t column = 0; column < 9; ++column)
+        {
+            uint8_t val = _notation[row*9 + column] - 48;
+            vecRow.push_back(new Cell(val));
+        }
+        mBoardMatrix.push_back(vecRow);
     }
 
     // Assign cells to row groups
-    for(int row = 0; row < 9; ++row)
+    for(const auto& row : mBoardMatrix)
     {
-        std::vector<const Cell*> subVec = {mCells.begin() + (row * 9), mCells.begin() + (row * 9) + 9};
-        Group rowGroup(subVec);
+        auto* rowGroup = new Group({row.begin(), row.end()});
+        for(auto cell : row)
+        {
+            cell->rowGroups = rowGroup;
+        }
         mRowGroups.push_back(rowGroup);
     }
 
     // Assign cells to column groups
     for(int column = 0; column < 9; ++column)
     {
-        std::vector<const Cell*> columnVec{};
-        columnVec.reserve(9);
+        std::unordered_set<const Cell*> columnSet{};
+        auto* columnGroup= new Group();
         for(int row = 0; row < 9; ++row)
         {
-            columnVec.push_back(mCells.at(row*9+column));
+            auto cell = mBoardMatrix.at(row).at(column);
+            columnGroup->mCells.push_back(cell);
+            cell->columnGroup = columnGroup;
         }
-        mColumnGroups.push_back(columnVec);
+        mColumnGroups.push_back(columnGroup);
+    }
 
+    // Assign cells to squares
+    for(int squareY = 0; squareY < 3; ++squareY)
+    {
+        for(int squareX = 0; squareX < 3; ++squareX)
+        {
+            auto* squareGroup = new Group();
+            for(int cellInSquareY = 0; cellInSquareY < 3; ++cellInSquareY)
+            {
+                for(int cellInSquareX = 0; cellInSquareX < 3; ++cellInSquareX)
+                {
+                    auto cell = mBoardMatrix.at(cellInSquareY + 3*squareY).at(cellInSquareX + 3*squareX);
+                    squareGroup->mCells.push_back(cell);
+                    cell->squareGroup = squareGroup;
+                }
+            }
+            mSquareGroups.push_back(squareGroup);
+        }
     }
 }
 
-Group Board::getRow(size_t _idx)
+std::vector<const Cell*> Board::getRow(size_t _idx) const
 {
-    return mRowGroups.at(_idx);
+    return mRowGroups.at(_idx)->mCells;
 }
 
-Group Board::getColumn(size_t _idx)
+std::vector<const Cell*> Board::getColumn(size_t _idx) const
 {
-    return mColumnGroups.at(_idx);
+    return mColumnGroups.at(_idx)->mCells;
 }
 
-Group Board::getSquare(size_t _idx)
+std::vector<const Cell*> Board::getSquare(size_t _idx) const
 {
-    return mSquareGroups.at(_idx);
+    return mSquareGroups.at(_idx)->mCells;
 }
+

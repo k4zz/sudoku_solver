@@ -8,20 +8,20 @@
 class Board
 {
 public:
-    using Cells = std::vector<const Cell*>;
-    using Groups = std::vector<Group>;
+    using BoardVecMatrix = std::vector<std::vector<Cell*>>;
+    using Groups = std::vector<Group*>;
 
     Board() = default;
     Board(const Board&) = delete;
     Board(const Board&&) = delete;
     explicit Board(const std::string& _notation);
 
-    Group getRow(size_t _idx);
-    Group getColumn(size_t _idx);
-    Group getSquare(size_t _idx);
+    std::vector<const Cell*> getRow(size_t _idx) const;
+    std::vector<const Cell*> getColumn(size_t _idx) const;
+    std::vector<const Cell*> getSquare(size_t _idx) const;
 
 private:
-    Cells mCells{};
+    BoardVecMatrix mBoardMatrix{};
     Groups mRowGroups{};
     Groups mColumnGroups{};
     Groups mSquareGroups{};

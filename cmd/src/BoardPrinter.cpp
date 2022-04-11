@@ -1,7 +1,7 @@
 #include "BoardPrinter.h"
 #include "Logger.h"
 
-void BoardPrinter::printBoard(Board& _board)
+void BoardPrinter::printBoard(const Board& _board)
 {
     printTopFrame();
     printRow(_board.getRow(0));
@@ -16,7 +16,6 @@ void BoardPrinter::printBoard(Board& _board)
     printRow(_board.getRow(7));
     printRow(_board.getRow(8));
     printBottomFrame();
-
 }
 
 void BoardPrinter::printBoard(const std::string& _notation)
@@ -36,15 +35,15 @@ void BoardPrinter::printBoard(const std::string& _notation)
     printBottomFrame();
 }
 
-void BoardPrinter::printRow(const Group& _group)
+void BoardPrinter::printRow(const std::vector<const Cell*>& _row)
 {
     std::string str{};
     str += "|";
-    for (size_t i = 1; i <= _group.mCells.size(); ++i)
+    for (size_t i = 1; i <= _row.size(); ++i)
     {
         std::string val{};
-        if(_group.mCells.at(i - 1)->value != 0)
-            val = std::to_string(_group.mCells.at(i - 1)->value);
+        if (_row.at(i - 1)->value != 0)
+            val = std::to_string(_row.at(i - 1)->value);
         else
             val = ".";
 
