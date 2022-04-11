@@ -1,6 +1,6 @@
-#include <algorithm>
 #include "Solver.h"
 #include "Logger.h"
+#include "Checker.h"
 
 bool Solver::solve(SolveMode _mode, Board& _board)
 {
@@ -23,7 +23,7 @@ bool Solver::solve(Board& _board)
 
     for (int num = 0; num <= 9; ++num)
     {
-        if(checkRules(_board, row, col, num))
+        if(Checker::validNumberForCell(_board, row, col, num))
         {
             _board.getCell(row, col)->value = num;
             if (solve(_board))
@@ -52,21 +52,4 @@ bool Solver::findEmpty(const Board& board, int& row, int& col)
     return false;
 }
 
-bool Solver::checkRules(Board& board, int row, int col, int num)
-{
-    auto isSame = [num](Cell* cell){ return cell->value == num; };
 
-    auto rowGroup = board.getRow(row);
-    if(std::find_if(rowGroup.begin(), rowGroup.end(), isSame) != rowGroup.end())
-        return false;
-
-    auto columnGroup = board.getColumn(col);
-    if(std::find_if(columnGroup.begin(), columnGroup.end(), isSame) != columnGroup.end())
-        return false;
-
-    auto squareGroup = board.getCell(row, col)->squareGroup->mCells;
-    if(std::find_if(squareGroup.begin(), squareGroup.end(), isSame) != squareGroup.end())
-        return false;
-
-    return true;
-}
