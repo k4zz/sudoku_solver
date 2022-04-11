@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Board.h"
+class Board;
 
 enum class SolveMode
 {

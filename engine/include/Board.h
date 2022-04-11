@@ -16,11 +16,11 @@ public:
     Board(const Board&&) = delete;
     explicit Board(const std::string& _notation);
 
-    std::vector<Cell*> getRow(size_t _idx) const;
-    std::vector<Cell*> getColumn(size_t _idx) const;
-    std::vector<Cell*> getSquare(size_t _idx) const;
+    [[nodiscard]] std::vector<Cell*> getRow(size_t _idx) const;
+    [[nodiscard]] std::vector<Cell*> getColumn(size_t _idx) const;
+    [[nodiscard]] std::vector<Cell*> getSquare(size_t _idx) const;
 
-    Cell* getCell(size_t row, size_t column) const;
+    [[nodiscard]] Cell* getCell(size_t row, size_t column) const;
 
 private:
     BoardVecMatrix mBoardMatrix{};

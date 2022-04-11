@@ -1,4 +1,7 @@
 #include "Solver.h"
+
+#include "Board.h"
+#include "Cell.h"
 #include "Logger.h"
 #include "Checker.h"
 

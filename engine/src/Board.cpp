@@ -37,7 +37,7 @@ Board::Board(const std::string& _notation)
     // Assign cells to column groups
     for(int column = 0; column < 9; ++column)
     {
-        std::unordered_set<const Cell*> columnSet{};
+        std::vector<const Cell*> columnSet{};
         auto* columnGroup= new Group();
         for(int row = 0; row < 9; ++row)
         {

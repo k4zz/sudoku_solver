@@ -6,6 +6,7 @@ project(SudokuSolver
 
 option(TESTS_ENABLE "" ON)
 
+add_subdirectory(3rdparty/cxxopts)
 add_subdirectory(logger)
 add_subdirectory(cmd)
 add_subdirectory(app)

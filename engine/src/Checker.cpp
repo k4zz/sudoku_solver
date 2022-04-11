@@ -1,5 +1,7 @@
 #include "Checker.h"
 
+#include "Board.h"
+
 #include <algorithm>
 
 bool Checker::validNumberForCell(Board& board, int row, int column, int num)
