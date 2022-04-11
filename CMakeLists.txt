@@ -12,6 +12,7 @@ add_subdirectory(app)
 add_subdirectory(engine)
 
 if (${TESTS_ENABLE})
+    add_subdirectory(3rdparty/googletest)
     enable_testing()
     include(GoogleTest)
     add_subdirectory(tests)

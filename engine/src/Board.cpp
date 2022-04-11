@@ -7,7 +7,9 @@
 Board::Board(const std::string& _notation)
 {
     if(_notation.length() != 81)
-        Log("Board: invalid size of notation");
+    {
+        throw std::invalid_argument("Invalid notation passed to board constructor");
+    }
 
     // Create cells in board matrix
     for(size_t row = 0; row < 9; ++row)
