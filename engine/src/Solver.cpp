@@ -1,5 +1,18 @@
 #include <algorithm>
 #include "Solver.h"
+#include "Logger.h"
+
+bool Solver::solve(SolveMode _mode, Board& _board)
+{
+    switch (_mode)
+    {
+        case SolveMode::BRUTEFORCE:
+            return solve(_board);
+        default:
+            Log("Non handled mode");
+            return false;
+    }
+}
 
 bool Solver::solve(Board& _board)
 {

@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     Board board(argv[1]);
     BoardPrinter::printBoard(board);
-    Solver::solve(board);
+    Solver::solve(SolveMode::BRUTEFORCE, board);
     BoardPrinter::printBoard(board);
 
 
