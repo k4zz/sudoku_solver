@@ -9,8 +9,8 @@ class Group
 {
 public:
     Group() = default;
-    Group(std::vector<const Cell*> _group) { mCells = _group; };
+    Group(std::vector<Cell*> _group) { mCells = _group; };
 
 public:
-    std::vector<const Cell*> mCells;
+    std::vector<Cell*> mCells;
 };

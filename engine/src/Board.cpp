@@ -66,18 +66,22 @@ Board::Board(const std::string& _notation)
     }
 }
 
-std::vector<const Cell*> Board::getRow(size_t _idx) const
+std::vector<Cell*> Board::getRow(size_t _idx) const
 {
     return mRowGroups.at(_idx)->mCells;
 }
 
-std::vector<const Cell*> Board::getColumn(size_t _idx) const
+std::vector<Cell*> Board::getColumn(size_t _idx) const
 {
     return mColumnGroups.at(_idx)->mCells;
 }
 
-std::vector<const Cell*> Board::getSquare(size_t _idx) const
+std::vector<Cell*> Board::getSquare(size_t _idx) const
 {
     return mSquareGroups.at(_idx)->mCells;
 }
 
+Cell* Board::getCell(size_t row, size_t column) const
+{
+    return this->getRow(row).at(column);
+}

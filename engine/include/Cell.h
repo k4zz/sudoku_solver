@@ -12,6 +12,8 @@ public:
     {
     }
 
+    void setValue(uint8_t _val) { value = _val; }
+
 public:
     uint8_t value{0};
     std::vector<uint8_t> pencilMarks{};

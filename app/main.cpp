@@ -1,6 +1,7 @@
 #include "Logger.h"
 #include "BoardPrinter.h"
 #include "Board.h"
+#include "Solver.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +16,9 @@ int main(int argc, char *argv[])
 
     Board board(argv[1]);
     BoardPrinter::printBoard(board);
+    Solver::solve(board);
+    BoardPrinter::printBoard(board);
+
 
     return 0;
 }

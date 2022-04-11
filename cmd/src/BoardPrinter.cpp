@@ -35,7 +35,7 @@ void BoardPrinter::printBoard(const std::string& _notation)
     printBottomFrame();
 }
 
-void BoardPrinter::printRow(const std::vector<const Cell*>& _row)
+void BoardPrinter::printRow(std::vector<Cell*> _row)
 {
     std::string str{};
     str += "|";
