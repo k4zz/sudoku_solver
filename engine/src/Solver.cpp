@@ -7,14 +7,14 @@ bool Solver::solve(SolveMode _mode, Board& _board)
     switch (_mode)
     {
         case SolveMode::BRUTEFORCE:
-            return solve(_board);
+            return solveBruteForce(_board);
         default:
             Log("Non handled mode");
             return false;
     }
 }
 
-bool Solver::solve(Board& _board)
+bool Solver::solveBruteForce(Board& _board)
 {
     int row, col;
 
@@ -26,7 +26,7 @@ bool Solver::solve(Board& _board)
         if(Checker::validNumberForCell(_board, row, col, num))
         {
             _board.getCell(row, col)->value = num;
-            if (solve(_board))
+            if (solveBruteForce(_board))
                 return true;
             _board.getCell(row, col)->value = 0;
         }
