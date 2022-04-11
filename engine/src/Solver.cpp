@@ -9,6 +9,9 @@ bool Solver::solve(SolveMode _mode, Board& _board)
 {
     switch (_mode)
     {
+        case SolveMode::UNKNOWN:
+            Log("Unknown mode for solving");
+            return false;
         case SolveMode::BRUTEFORCE:
             return solveBruteForce(_board);
         default:

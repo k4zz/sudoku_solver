@@ -26,26 +26,31 @@ int main(int argc, char** argv)
         return 0;
     }
 
-    // TODO: can be removed when GUI will be available
-    if(!results.count("notation"))
+    if (results.count("notation")) // CMD
     {
-        Log("Notation argument is mandatory (at least for now)");
+        char emptyCell = '0';
+        if (results.count("empty-cell"))
+            emptyCell = results["empty-cell"].as<char>();
+
+        auto notation = results["notation"].as<std::string>();
+
+        if(Validator::isValid(notation, emptyCell))
+            Log("Notation is invalid");
+            //TODO: why?
+
+        Validator::reformatNotation(notation);
+
+        Board board(notation);
+        BoardPrinter::printBoard(board);
+        Solver::solve(SolveMode::BRUTEFORCE, board);
+        BoardPrinter::printBoard(board);
+    }
+    else // GUI
+    {
+        //TODO: init GUI, for now - print help
+        Log(options.help());
         return 0;
     }
-
-    char emptyCell = '0';
-    if(results.count("empty-cell"))
-        emptyCell = results["empty-cell"].as<char>();
-
-    auto notation = results["notation"].as<std::string>();
-
-    Validator::isValid(notation, emptyCell);
-    Validator::reformatNotation(notation);
-
-    Board board(notation);
-    BoardPrinter::printBoard(board);
-    Solver::solve(SolveMode::BRUTEFORCE, board);
-    BoardPrinter::printBoard(board);
 
     return 0;
 }

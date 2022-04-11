@@ -4,6 +4,7 @@ class Board;
 
 enum class SolveMode
 {
+    UNKNOWN,
     BRUTEFORCE
 };
 
