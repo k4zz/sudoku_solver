@@ -4,6 +4,7 @@
 #include "Cell.h"
 #include "Logger.h"
 #include "Checker.h"
+#include "TimerObject.h"
 
 bool Solver::solve(SolveMode _mode, Board& _board)
 {
@@ -13,7 +14,12 @@ bool Solver::solve(SolveMode _mode, Board& _board)
             Log("Unknown mode for solving");
             return false;
         case SolveMode::BRUTEFORCE:
+        {
+            //TODO: I don't like the order of that, Timer also a little bit hacky :/
+            TimerObject obj;
+            Log("Solved by BruteForce");
             return solveBruteForce(_board);
+        }
         default:
             Log("Non handled mode");
             return false;
