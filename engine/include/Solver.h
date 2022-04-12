@@ -13,7 +13,7 @@ class Solver
 public:
     static bool solve(SolveMode _mode, Board& _board);
 private:
-    static bool solveBruteForce(Board& _board);
+    static void solveBruteForce(Board& _board, bool& _result);
     static bool findEmpty(const Board& board, int& row, int& col);
 };
 

@@ -4,46 +4,58 @@
 #include "Cell.h"
 #include "Logger.h"
 #include "Checker.h"
-#include "TimerObject.h"
+#include "Stopwatch.h"
 
 bool Solver::solve(SolveMode _mode, Board& _board)
 {
+    bool result = false;
     switch (_mode)
     {
         case SolveMode::UNKNOWN:
             Log("Unknown mode for solving");
-            return false;
         case SolveMode::BRUTEFORCE:
         {
-            //TODO: I don't like the order of that, Timer also a little bit hacky :/
-            TimerObject obj;
-            Log("Solved by BruteForce");
-            return solveBruteForce(_board);
+            auto time = FunctionStopwatch::duration(solveBruteForce, _board, result);
+            if (result)
+            {
+                Log("Solving by BruteForce took " + std::to_string(time.count()) + " [ms]");
+            } else
+            {
+                Log("Failed to resolve by BruteForce");
+            }
+            break;
         }
         default:
             Log("Non handled mode");
-            return false;
     }
+    return result;
 }
 
-bool Solver::solveBruteForce(Board& _board)
+void Solver::solveBruteForce(Board& _board, bool& _result)
 {
     int row, col;
 
-    if(!findEmpty(_board, row, col))
-        return true;
+    if (!findEmpty(_board, row, col))
+    {
+        _result = true;
+        return;
+    }
 
     for (int num = 0; num <= 9; ++num)
     {
-        if(Checker::validNumberForCell(_board, row, col, num))
+        if (Checker::validNumberForCell(_board, row, col, num))
         {
             _board.getCell(row, col)->value = num;
-            if (solveBruteForce(_board))
-                return true;
+            solveBruteForce(_board, _result);
+            if (_result)
+            {
+                _result = true;
+                return;
+            }
             _board.getCell(row, col)->value = 0;
         }
     }
-    return false;
+    _result = false;
 }
 
 bool Solver::findEmpty(const Board& board, int& row, int& col)
@@ -53,7 +65,7 @@ bool Solver::findEmpty(const Board& board, int& row, int& col)
         auto vec = board.getRow(rowIdx);
         for (int colIdx = 0; colIdx < 9; ++colIdx)
         {
-            if(vec.at(colIdx)->value == 0)
+            if (vec.at(colIdx)->value == 0)
             {
                 row = rowIdx;
                 col = colIdx;

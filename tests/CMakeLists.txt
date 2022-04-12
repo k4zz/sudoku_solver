@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(tests)
-
 message(STATUS "Added ${PROJECT_NAME}")
 
 #add_subdirectory(tests_database)
