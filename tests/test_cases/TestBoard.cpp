@@ -70,3 +70,16 @@ TEST(Board, DiagonalNotation_AllCellsHaveProperValue)
     }
 }
 
+TEST(Board, InvalidCharsInNotation_ThrowException)
+{
+    auto notation = "abc456789234567891345678912456789123567891234678912345789123456891234567912345678";
+
+    ASSERT_ANY_THROW(Board board(notation));
+}
+
+TEST(Board, InvalidLengthOfNotation_ThrowException)
+{
+    auto notation = "123123123";
+
+    ASSERT_ANY_THROW(Board board(notation));
+}

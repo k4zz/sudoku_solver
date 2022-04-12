@@ -5,7 +5,7 @@ bool Validator::isValid(const std::string& _notation, char emptyCell)
     if(_notation.size() != 81)
         return false;
 
-    if(emptyCell >= '1' || emptyCell <= '9')
+    if(emptyCell >= '1' && emptyCell <= '9')
         return false;
 
     for(const auto& chr : _notation)
