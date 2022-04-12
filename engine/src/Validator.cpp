@@ -14,7 +14,6 @@ bool Validator::isValid(const std::string& _notation, char emptyCell)
             return false;
     }
 
-
     return true;
 }
 

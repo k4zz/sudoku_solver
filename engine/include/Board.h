@@ -19,8 +19,9 @@ public:
     [[nodiscard]] std::vector<Cell*> getRow(size_t _idx) const;
     [[nodiscard]] std::vector<Cell*> getColumn(size_t _idx) const;
     [[nodiscard]] std::vector<Cell*> getSquare(size_t _idx) const;
-
     [[nodiscard]] Cell* getCell(size_t row, size_t column) const;
+
+    std::string getNotation() const;
 
 private:
     BoardVecMatrix mBoardMatrix{};

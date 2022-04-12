@@ -4,12 +4,13 @@
 
 #include <algorithm>
 
-bool Checker::validNumberForCell(Board& board, int row, int column, int num)
+bool Checker::validNumberForCell(const Board& board, size_t row, size_t column, size_t num)
 {
     if (Checker::validForRow(board, row, num) &&
         Checker::validForColumn(board, column, num) &&
         Checker::validForSquare(board, row, column, num))
         return true;
+
 
     return false;
 }

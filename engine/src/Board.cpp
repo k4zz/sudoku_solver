@@ -20,11 +20,9 @@ Board::Board(const std::string& _notation)
             if (_notation[row * 9 + column] < '0' || _notation[row * 9 + column] > '9')
                 throw std::invalid_argument(
                         "Invalid char in notation, " + std::string(1, _notation[row * 9 + column]) + " at " +
-                                std::to_string(row * 9 + column) + " position");
-
+                        std::to_string(row * 9 + column) + " position");
 
             uint8_t val = _notation[row * 9 + column] - 48;
-
 
             vecRow.push_back(new Cell(val));
         }
@@ -94,4 +92,13 @@ std::vector<Cell*> Board::getSquare(size_t _idx) const
 Cell* Board::getCell(size_t row, size_t column) const
 {
     return this->getRow(row).at(column);
+}
+
+std::string Board::getNotation() const
+{
+    std::string notation{};
+    for(size_t row = 0; row < 9; ++row)
+        for(size_t column = 0; column < 9; ++column)
+            notation.append(std::to_string(this->getCell(row,column)->value));
+    return notation;
 }

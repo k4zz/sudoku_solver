@@ -44,6 +44,7 @@ int main(int argc, char** argv)
         BoardPrinter::printBoard(board);
         Solver::solve(SolveMode::BRUTEFORCE, board);
         BoardPrinter::printBoard(board);
+        std::cout << board.getNotation() << std::endl;
     }
     else // GUI
     {

@@ -1,7 +1,6 @@
 #include "Solver.h"
 
 #include "Board.h"
-#include "Cell.h"
 #include "Logger.h"
 #include "Checker.h"
 #include "Stopwatch.h"
@@ -9,6 +8,7 @@
 bool Solver::solve(SolveMode _mode, Board& _board)
 {
     bool result = false;
+
     switch (_mode)
     {
         case SolveMode::UNKNOWN:
