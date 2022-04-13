@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Validator.h"
 
-TEST(Validator, ValidNotationAllFilled_ValidatorReturnTrue)
+TEST(Unit_Validator, ValidNotationAllFilled_ValidatorReturnTrue)
 {
     auto notation = "123123123123123123123123123123123123123123123123123123123123123123123123123123123";
     char emptyCell = '0';
@@ -9,7 +9,7 @@ TEST(Validator, ValidNotationAllFilled_ValidatorReturnTrue)
     ASSERT_EQ(Validator::isValid(notation, emptyCell), true);
 }
 
-TEST(Validator, ValidNotationAllEmpty_ValidatorReturnTrue)
+TEST(Unit_Validator, ValidNotationAllEmpty_ValidatorReturnTrue)
 {
     auto notation = "000000000000000000000000000000000000000000000000000000000000000000000000000000000";
     char emptyCell = '0';
@@ -17,7 +17,7 @@ TEST(Validator, ValidNotationAllEmpty_ValidatorReturnTrue)
     ASSERT_EQ(Validator::isValid(notation, emptyCell), true);
 }
 
-TEST(Validator, ValidNotationMixed_ValidatorReturnTrue)
+TEST(Unit_Validator, ValidNotationMixed_ValidatorReturnTrue)
 {
     auto notation = "103050607103050607103050607103050607103050607103050607103050607103050607103050607";
     char emptyCell = '0';
@@ -25,7 +25,7 @@ TEST(Validator, ValidNotationMixed_ValidatorReturnTrue)
     ASSERT_EQ(Validator::isValid(notation, emptyCell), true);
 }
 
-TEST(Validator, InvalidEmptyCell_ValidatorReturnFalse)
+TEST(Unit_Validator, InvalidEmptyCell_ValidatorReturnFalse)
 {
     auto notation = "123000000000000000000000000000000000000000000000000000000000000000000000000000000";
     char emptyCell = 'a';
@@ -33,7 +33,7 @@ TEST(Validator, InvalidEmptyCell_ValidatorReturnFalse)
     ASSERT_EQ(Validator::isValid(notation, emptyCell), false);
 }
 
-TEST(Validator, InvalidEmptyCellSameAsSudoku_ValidatorReturnTrue)
+TEST(Unit_Validator, InvalidEmptyCellSameAsSudoku_ValidatorReturnTrue)
 {
     auto notation = "103050607103050607103050607103050607103050607103050607103050607103050607103050607";
     char emptyCell = '1';
@@ -41,7 +41,7 @@ TEST(Validator, InvalidEmptyCellSameAsSudoku_ValidatorReturnTrue)
     ASSERT_EQ(Validator::isValid(notation, emptyCell), false);
 }
 
-TEST(Validator, InvalidNotationLength_ValidatorReturnFalse)
+TEST(Unit_Validator, InvalidNotationLength_ValidatorReturnFalse)
 {
     auto notation = "123123";
     char emptyCell = '0';
@@ -49,7 +49,7 @@ TEST(Validator, InvalidNotationLength_ValidatorReturnFalse)
     ASSERT_EQ(Validator::isValid(notation, emptyCell), false);
 }
 
-TEST(Validator, ValidNotationWithZeros_ReformatSameString)
+TEST(Unit_Validator, ValidNotationWithZeros_ReformatSameString)
 {
     std::string notation1 = "103050607103050607103050607103050607103050607103050607103050607103050607103050607";
     std::string notation2 = "103050607103050607103050607103050607103050607103050607103050607103050607103050607";
@@ -59,7 +59,7 @@ TEST(Validator, ValidNotationWithZeros_ReformatSameString)
     ASSERT_EQ(notation1, notation2);
 }
 
-TEST(Validator, ValidNotationWithA_ReformatSameString)
+TEST(Unit_Validator, ValidNotationWithA_ReformatSameString)
 {
     std::string notation1 = "1a3a5a6a71a3a5a6a71a3a5a6a71a3a5a6a71a3a5a6a71a3a5a6a71a3a5a6a71a3a5a6a71a3a5a6a7";
     std::string notation2 = "103050607103050607103050607103050607103050607103050607103050607103050607103050607";

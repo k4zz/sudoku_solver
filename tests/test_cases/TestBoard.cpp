@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Board.h"
 
-TEST(Board, HorizontalNotation_AllCellsHaveProperValue)
+TEST(Unit_Board, HorizontalNotation_AllCellsHaveProperValue)
 {
     auto notation = "123456789123456789123456789123456789123456789123456789123456789123456789123456789";
 
@@ -24,7 +24,7 @@ TEST(Board, HorizontalNotation_AllCellsHaveProperValue)
     }
 }
 
-TEST(Board, VerticalNotation_AllCellsHaveProperValue)
+TEST(Unit_Board, VerticalNotation_AllCellsHaveProperValue)
 {
     auto notation = "111111111222222222333333333444444444555555555666666666777777777888888888999999999";
 
@@ -47,7 +47,7 @@ TEST(Board, VerticalNotation_AllCellsHaveProperValue)
     }
 }
 
-TEST(Board, DiagonalNotation_AllCellsHaveProperValue)
+TEST(Unit_Board, DiagonalNotation_AllCellsHaveProperValue)
 {
     auto notation = "123456789234567891345678912456789123567891234678912345789123456891234567912345678";
 
@@ -70,14 +70,14 @@ TEST(Board, DiagonalNotation_AllCellsHaveProperValue)
     }
 }
 
-TEST(Board, InvalidCharsInNotation_ThrowException)
+TEST(Unit_Board, InvalidCharsInNotation_ThrowException)
 {
     auto notation = "abc456789234567891345678912456789123567891234678912345789123456891234567912345678";
 
     ASSERT_ANY_THROW(Board board(notation));
 }
 
-TEST(Board, InvalidLengthOfNotation_ThrowException)
+TEST(Unit_Board, InvalidLengthOfNotation_ThrowException)
 {
     auto notation = "123123123";
 
