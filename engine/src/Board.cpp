@@ -97,8 +97,28 @@ Cell* Board::getCell(size_t _row, size_t _column) const
 std::string Board::getNotation() const
 {
     std::string notation{};
-    for(size_t row = 0; row < 9; ++row)
-        for(size_t column = 0; column < 9; ++column)
-            notation.append(std::to_string(this->getCell(row,column)->value));
+    for (size_t row = 0; row < 9; ++row)
+        for (size_t column = 0; column < 9; ++column)
+            notation.append(std::to_string(this->getCell(row, column)->value));
     return notation;
+}
+
+Board::~Board()
+{
+    for (auto& row: mBoardMatrix)
+    {
+        for (size_t column = 0; column < mBoardMatrix.size(); ++column)
+        {
+            delete row.at(column);
+        }
+    }
+
+    for (auto& item : mRowGroups)
+        delete item;
+
+    for (auto& item : mColumnGroups)
+        delete item;
+
+    for (auto& item : mSquareGroups)
+        delete item;
 }

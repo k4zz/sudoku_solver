@@ -41,7 +41,7 @@ public:
 
         auto notation = results["notation"].as<std::string>();
 
-        if (Validator::isValid(notation, emptyCell))
+        if (!Validator::isValid(notation, emptyCell))
             Log("Notation is invalid");
         //TODO: why?
 

@@ -11,6 +11,7 @@ public:
     using Groups = std::vector<Group*>;
 
     Board() = default;
+    ~Board();
     Board(const Board&) = delete;
     Board(const Board&&) = delete;
     explicit Board(const std::string& _notation);
