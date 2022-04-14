@@ -3,7 +3,6 @@
 #include "Group.h"
 
 #include <string>
-#include <vector>
 
 class Board
 {
@@ -19,9 +18,9 @@ public:
     [[nodiscard]] std::vector<Cell*> getRow(size_t _idx) const;
     [[nodiscard]] std::vector<Cell*> getColumn(size_t _idx) const;
     [[nodiscard]] std::vector<Cell*> getSquare(size_t _idx) const;
-    [[nodiscard]] Cell* getCell(size_t row, size_t column) const;
+    [[nodiscard]] Cell* getCell(size_t _row, size_t _column) const;
 
-    std::string getNotation() const;
+    [[nodiscard]] std::string getNotation() const;
 
 private:
     BoardVecMatrix mBoardMatrix{};

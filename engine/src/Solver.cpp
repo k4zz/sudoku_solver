@@ -13,6 +13,7 @@ bool Solver::solve(SolveMode _mode, Board& _board)
     {
         case SolveMode::UNKNOWN:
             Log("Unknown mode for solving");
+            return false;
         case SolveMode::BRUTEFORCE:
         {
             auto time = FunctionStopwatch::duration(solveBruteForce, _board, result);
@@ -33,7 +34,7 @@ bool Solver::solve(SolveMode _mode, Board& _board)
 
 void Solver::solveBruteForce(Board& _board, bool& _result)
 {
-    int row, col;
+    std::size_t row, col;
 
     if (!findEmpty(_board, row, col))
     {
@@ -58,7 +59,7 @@ void Solver::solveBruteForce(Board& _board, bool& _result)
     _result = false;
 }
 
-bool Solver::findEmpty(const Board& board, int& row, int& col)
+bool Solver::findEmpty(const Board& board, size_t& row, size_t& col)
 {
     for (int rowIdx = 0; rowIdx < 9; ++rowIdx)
     {

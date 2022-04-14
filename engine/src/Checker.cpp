@@ -4,46 +4,45 @@
 
 #include <algorithm>
 
-bool Checker::validNumberForCell(const Board& board, size_t row, size_t column, size_t num)
+bool Checker::validNumberForCell(const Board& _board, size_t _row, size_t _column, size_t _num)
 {
-    if (Checker::validForRow(board, row, num) &&
-        Checker::validForColumn(board, column, num) &&
-        Checker::validForSquare(board, row, column, num))
+    if (Checker::validForRow(_board, _row, _num) &&
+        Checker::validForColumn(_board, _column, _num) &&
+        Checker::validForSquare(_board, _row, _column, _num))
         return true;
-
 
     return false;
 }
 
-bool Checker::validForRow(const Board& board, int row, int num)
+bool Checker::validForRow(const Board& _board, size_t _row, size_t _num)
 {
-    auto isSame = [num](Cell* cell)
-    { return cell->value == num; };
+    auto isSame = [_num](Cell* cell)
+    { return cell->value == _num; };
 
-    auto rowGroup = board.getRow(row);
+    auto rowGroup = _board.getRow(_row);
     if (std::find_if(rowGroup.begin(), rowGroup.end(), isSame) == rowGroup.end())
         return true;
     return false;
 }
 
-bool Checker::validForColumn(const Board& board, int column, int num)
+bool Checker::validForColumn(const Board& _board, size_t _column, size_t _num)
 {
-    auto isSame = [num](Cell* cell)
-    { return cell->value == num; };
+    auto isSame = [_num](Cell* cell)
+    { return cell->value == _num; };
 
-    auto columnGroup = board.getColumn(column);
+    auto columnGroup = _board.getColumn(_column);
     if (std::find_if(columnGroup.begin(), columnGroup.end(), isSame) == columnGroup.end())
         return true;
 
     return false;
 }
 
-bool Checker::validForSquare(const Board& board, int row, int column, int num)
+bool Checker::validForSquare(const Board& _board, size_t _row, size_t _column, size_t _num)
 {
-    auto isSame = [num](Cell* cell)
-    { return cell->value == num; };
+    auto isSame = [_num](Cell* cell)
+    { return cell->value == _num; };
 
-    auto squareGroup = board.getCell(row, column)->squareGroup->mCells;
+    auto squareGroup = _board.getCell(_row, _column)->squareGroup->mCells;
     if (std::find_if(squareGroup.begin(), squareGroup.end(), isSame) == squareGroup.end())
         return true;
 

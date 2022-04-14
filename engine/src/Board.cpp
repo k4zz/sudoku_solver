@@ -89,9 +89,9 @@ std::vector<Cell*> Board::getSquare(size_t _idx) const
     return mSquareGroups.at(_idx)->mCells;
 }
 
-Cell* Board::getCell(size_t row, size_t column) const
+Cell* Board::getCell(size_t _row, size_t _column) const
 {
-    return this->getRow(row).at(column);
+    return this->getRow(_row).at(_column);
 }
 
 std::string Board::getNotation() const
