@@ -17,7 +17,6 @@ void BoardPrinter::printBoard(const Board& _board)
     printRow(_board.getRow(8));
     printBottomFrame();
 }
-
 void BoardPrinter::printBoard(const std::string& _notation)
 {
     printTopFrame();
@@ -116,5 +115,3 @@ void BoardPrinter::printBottomFrame()
     }
     Log(str);
 }
-
-
