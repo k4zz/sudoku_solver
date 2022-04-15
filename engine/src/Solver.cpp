@@ -66,7 +66,7 @@ bool Solver::findEmpty(const Board& board, size_t& row, size_t& col)
         auto vec = board.getRow(rowIdx);
         for (int colIdx = 0; colIdx < 9; ++colIdx)
         {
-            if (vec.at(colIdx)->value == 0)
+            if (vec->at(colIdx)->value == 0)
             {
                 row = rowIdx;
                 col = colIdx;

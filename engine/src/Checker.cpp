@@ -16,34 +16,29 @@ bool Checker::validNumberForCell(const Board& _board, size_t _row, size_t _colum
 
 bool Checker::validForRow(const Board& _board, size_t _row, size_t _num)
 {
-    auto isSame = [_num](Cell* cell)
-    { return cell->value == _num; };
-
     auto rowGroup = _board.getRow(_row);
-    if (std::find_if(rowGroup.begin(), rowGroup.end(), isSame) == rowGroup.end())
-        return true;
-    return false;
+    return validForGroup(rowGroup, _num);
 }
 
 bool Checker::validForColumn(const Board& _board, size_t _column, size_t _num)
 {
-    auto isSame = [_num](Cell* cell)
-    { return cell->value == _num; };
-
     auto columnGroup = _board.getColumn(_column);
-    if (std::find_if(columnGroup.begin(), columnGroup.end(), isSame) == columnGroup.end())
-        return true;
-
-    return false;
+    return validForGroup(columnGroup, _num);
 }
 
 bool Checker::validForSquare(const Board& _board, size_t _row, size_t _column, size_t _num)
 {
+    auto squareGroup = _board.getCell(_row, _column)->squareGroup;
+    return validForGroup(squareGroup, _num);
+}
+
+
+bool Checker::validForGroup(const std::vector<Cell*>* _group, size_t _num)
+{
     auto isSame = [_num](Cell* cell)
     { return cell->value == _num; };
 
-    auto squareGroup = _board.getCell(_row, _column)->squareGroup->mCells;
-    if (std::find_if(squareGroup.begin(), squareGroup.end(), isSame) == squareGroup.end())
+    if (std::find_if(_group->begin(), _group->end(), isSame) == _group->end())
         return true;
 
     return false;

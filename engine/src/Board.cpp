@@ -32,7 +32,7 @@ Board::Board(const std::string& _notation)
     // Assign cells to row groups
     for (const auto& row: mBoardMatrix)
     {
-        auto* rowGroup = new Group({row.begin(), row.end()});
+        auto rowGroup = new Group({row.begin(), row.end()});
         for (auto cell: row)
         {
             cell->rowGroups = rowGroup;
@@ -43,12 +43,11 @@ Board::Board(const std::string& _notation)
     // Assign cells to column groups
     for (int column = 0; column < 9; ++column)
     {
-        std::vector<const Cell*> columnSet{};
         auto* columnGroup = new Group();
         for (int row = 0; row < 9; ++row)
         {
             auto cell = mBoardMatrix.at(row).at(column);
-            columnGroup->mCells.push_back(cell);
+            columnGroup->push_back(cell);
             cell->columnGroup = columnGroup;
         }
         mColumnGroups.push_back(columnGroup);
@@ -65,7 +64,7 @@ Board::Board(const std::string& _notation)
                 for (int cellInSquareX = 0; cellInSquareX < 3; ++cellInSquareX)
                 {
                     auto cell = mBoardMatrix.at(cellInSquareY + 3 * squareY).at(cellInSquareX + 3 * squareX);
-                    squareGroup->mCells.push_back(cell);
+                    squareGroup->push_back(cell);
                     cell->squareGroup = squareGroup;
                 }
             }
@@ -74,24 +73,19 @@ Board::Board(const std::string& _notation)
     }
 }
 
-std::vector<Cell*> Board::getRow(size_t _idx) const
+std::vector<Cell*>* Board::getRow(size_t _idx) const
 {
-    return mRowGroups.at(_idx)->mCells;
+    return mRowGroups.at(_idx);
 }
 
-std::vector<Cell*> Board::getColumn(size_t _idx) const
+std::vector<Cell*>* Board::getColumn(size_t _idx) const
 {
-    return mColumnGroups.at(_idx)->mCells;
-}
-
-std::vector<Cell*> Board::getSquare(size_t _idx) const
-{
-    return mSquareGroups.at(_idx)->mCells;
+    return mColumnGroups.at(_idx);
 }
 
 Cell* Board::getCell(size_t _row, size_t _column) const
 {
-    return this->getRow(_row).at(_column);
+    return mBoardMatrix.at(_row).at(_column);
 }
 
 std::string Board::getNotation() const

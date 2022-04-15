@@ -19,6 +19,7 @@ RUN apt-get update \
       rsync \
       tar \
       python \
+      valgrind \
   && apt-get clean
 
 RUN ( \

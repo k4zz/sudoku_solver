@@ -15,6 +15,6 @@ private:
     static void printBottomFrame();
     static void printMiddleFrame();
     static void printRow(const std::string& _str);
-    static void printRow(std::vector<Cell*> _row);
+    static void printRow(std::vector<Cell*>* _row);
 };
 

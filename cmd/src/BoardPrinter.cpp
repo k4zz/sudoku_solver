@@ -34,15 +34,15 @@ void BoardPrinter::printBoard(const std::string& _notation)
     printBottomFrame();
 }
 
-void BoardPrinter::printRow(std::vector<Cell*> _row)
+void BoardPrinter::printRow(std::vector<Cell*>* _row)
 {
     std::string str{};
     str += "|";
-    for (size_t i = 1; i <= _row.size(); ++i)
+    for (size_t i = 1; i <= _row->size(); ++i)
     {
         std::string val{};
-        if (_row.at(i - 1)->value != 0)
-            val = std::to_string(_row.at(i - 1)->value);
+        if (_row->at(i - 1)->value != 0)
+            val = std::to_string(_row->at(i - 1)->value);
         else
             val = ".";
 

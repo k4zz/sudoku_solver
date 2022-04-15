@@ -3,11 +3,12 @@
 #include <vector>
 #include <memory>
 
-class Group;
 
 class Cell
 {
 public:
+    using Group = std::vector<Cell*>;
+
     Cell(uint8_t _value)
             : value{_value}
     {
