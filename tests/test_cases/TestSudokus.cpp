@@ -6,7 +6,7 @@
 
 #include "TestFilesPaths.h"
 
-TEST(Sudokus, SetOfValidSudokus_AllResolvedCorrectly)
+TEST(Sudokus, SetOfValidSudokus_BruteForce_AllResolvedCorrectly)
 {
     std::ifstream file(SET_OF_SUDOKUS);
     std::string line{};
@@ -15,6 +15,21 @@ TEST(Sudokus, SetOfValidSudokus_AllResolvedCorrectly)
         std::string notation = line.substr(0, 81);
         Board board(notation);
         Solver::solve(SolveMode::BRUTEFORCE, board);
+        std::string solverSolution = board.getNotation();
+        std::string actualSolution = line.substr(82, 81);
+        ASSERT_EQ(solverSolution, actualSolution);
+    }
+}
+
+TEST(Sudokus, SetOfValidSudokus_BruteForcePrio_AllResolvedCorrectly)
+{
+    std::ifstream file(SET_OF_SUDOKUS);
+    std::string line{};
+    while (std::getline(file, line))
+    {
+        std::string notation = line.substr(0, 81);
+        Board board(notation);
+        Solver::solve(SolveMode::BRUTEFORCE_WITH_PRIO, board);
         std::string solverSolution = board.getNotation();
         std::string actualSolution = line.substr(82, 81);
         ASSERT_EQ(solverSolution, actualSolution);

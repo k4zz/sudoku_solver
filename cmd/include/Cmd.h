@@ -47,11 +47,19 @@ public:
 
         Validator::reformatNotation(notation);
 
-        Board board(notation);
-        BoardPrinter::printBoard(board);
-        Solver::solve(SolveMode::BRUTEFORCE, board);
-        BoardPrinter::printBoard(board);
-        std::cout << board.getNotation() << std::endl;
+        Board board1(notation);
+        BoardPrinter::printBoard(board1);
+        Solver::solve(SolveMode::BRUTEFORCE, board1);
+        BoardPrinter::printBoard(board1);
+        std::cout << board1.getNotation() << std::endl;
+
+        std::cout << "-----------------------------" << std::endl;
+
+        Board board2(notation);
+        BoardPrinter::printBoard(board2);
+        Solver::solve(SolveMode::BRUTEFORCE_WITH_PRIO, board2);
+        BoardPrinter::printBoard(board2);
+        std::cout << board2.getNotation() << std::endl;
 
         return 0;
     }
